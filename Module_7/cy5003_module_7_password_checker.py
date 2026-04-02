@@ -181,7 +181,7 @@ def main():
     time.sleep(1)
     while True:
         try:
-            first = input("Enter your first name: ")
+            first = input("Enter your first name: ")     
             last = input("Enter your last name: ")
             birth_year = validate_birth_year(input("Enter your birth year (YYYY): "))
             pw_input = input("Enter a password to check (or type 'e' to exit): ")
