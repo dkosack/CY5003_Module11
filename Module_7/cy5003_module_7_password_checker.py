@@ -24,6 +24,10 @@ ALLOWED = (
     "0123456789"
     "!@#$%^&*_-"
 )
+# Security Issue: The password whitelist is limited to letters, numbers, and a few symbols. 
+# This could lead to users creating passwords that are less secure because they are limited in character variety. 
+# To fix this, we could expand the whitelist to include a wider range of symbols and special characters, 
+# which would encourage users to create more complex and secure passwords.
 
 # Common weak passwords
 COMMON = {
@@ -162,7 +166,9 @@ def assess_password(password, first, last, birth_year):
     else:
         label = "Strong"
     return label, reasons
-
+# Security Issue: There is no limit to how many times the user can attempt to enter a password, 
+# which could lead to an infinite loop if the user keeps entering invalid passwords. Makes this open to brute-force attacks. 
+# To fix this, we could implement a counter to limit the number of attempts and exit the loop after a certain number of failed attempts.
 
 def main():
     """ Main loop: runs until user types 'e'. """
@@ -195,7 +201,11 @@ def main():
         except ValueError as e:
             print(f"\nInput error: {e}")
             print("Please try again.")
-
+# Security Issue: There is no validation on first and last name inputs. If the user presses enter without typing anything, 
+# the program will consider an empty string as a valid name. 
+# This could lead to false positives when checking for personal information in the password, 
+# as an empty string is technically contained in any password. 
+# To fix this, we should add validation to ensure that the first and last name inputs are not empty and do not contain only whitespace.
 
 if __name__ == "__main__":
     main()
