@@ -22,7 +22,8 @@ def validate_range(input):
     If not in the correct range, raises a ValueError.
     If in the correct range, returns the input.
     """
-
+# Security Comment 1: This assumes part[1] exists and is numeric before conversion
+# It would be safer to validate the split result and digit format first to avoid errors on malformed input
     parts = input.split() # breaks string into letters + nums
     if not (5000 <= int(parts[1]) <= 8000): # checks range of code num
         raise ValueError("Code number not in correct range.")
@@ -58,7 +59,8 @@ def validate_pattern(input):
 def validate_input(input):
     """Runs user input through each validation function.
     Returns input."""
-
+# Security Comment 2: The range check runs before the format check
+# Validating the pattern first would reduce unsafe assumptions and prevent errors from malformed input
     user_input = validate_range(input) # checks type
     user_input = validate_length(input) # checks length
     user_input = validate_pattern(input) # checks pattern
@@ -72,6 +74,8 @@ def main():
     in either list, prints "course not found" statement.
     Also prints required output statement."""
 
+    # Suggestion for Improvement: the program could be easier to maintain and update
+    # by moving bridge_lst and core_lst outside main() or using sets for lookup
     bridge_lst = ["CS 5001", "CS 5003", "CS 5002", "CY 5001",
                   "CY 5003"] # list of bridge courses
     
@@ -80,6 +84,9 @@ def main():
                 "CY 5200", "CY 5210", "CY 5240", "CY 5250",
                 "CY 6200", "CY 7900"] # list of core courses
     
+    # Security Comment 3: Input is used without normalization
+    # Applying strip() and upper() first would make validation more reliable
+    # and handle edge cases like lowercase input or extra spaces
     try: # try block
         course = input("Please enter a course code." + 
                    " Please use the format 'CY 0000': ") 
