@@ -11,16 +11,17 @@ print("Let's get started with a few mini projects.\n")
 # ---------------------------
 
 print("\nPROJECT 1: Hello, Name!")
-name = input("Enter your name: ")
-print("Hello,", name, "! Welcome to CyberVets Python.\n")
+name = input("Enter your name: ") 
+print("Hello,", name, "! Welcome to CyberVets Python.\n") 
+# Potential reasonability test for numbers, special characters, length -SH
 
 # ---------------------------
 # Project 2: Basic Calculator
 # ---------------------------
 
 print("PROJECT 2: Small Calculator")
-num1 = float(input("Enter first number: "))
-num2 = float(input("Enter second number: "))
+num1 = float(input("Enter first number: ")) # Missing error handling for value/type errors -SH
+num2 = float(input("Enter second number: ")) # Missing error handling for value/type errors -SH
 
 print("Addition:", num1 + num2)
 print("Subtraction:", num1 - num2)
@@ -32,7 +33,7 @@ print()
 
 print("PROJECT 3: Motivational Quote")
 
-import random
+import random # For readability could be at the start of the program in the global scope -SH
 
 quotes = [
     "Keep going—you’re doing great!",
