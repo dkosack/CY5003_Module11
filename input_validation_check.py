@@ -21,6 +21,7 @@ def age_check(age):
         # setting a reasonable range because the game is supposedly rated 8+
         raise ValueError("That age is either too young or too old to play (ages 8-100)")
     # Error from outside reasonable range
+
 def x_axis_check (x_cordinates):
     """ This function checks the x input of a player's guess"""
     if not isinstance(x_cordinates, int):
@@ -30,6 +31,7 @@ def x_axis_check (x_cordinates):
     if x_cordinates < 0 or x_cordinates > 10:
         # if statement to ensure the input is reasonable
         raise ValueError("X coordinates have to be greater than 0 and less than 10")
+
 def y_axis_check (y_coordinates):
     """ This function checks the y input of a player's guess"""
     if not isinstance(y_coordinates, str): # if statement ensuring the input is a string
@@ -47,6 +49,7 @@ def y_axis_check (y_coordinates):
         raise ValueError("Only letters A-J are valid")
     # Raises an error if the input is outside that range
 
+
 def main():
     "Main function that uses helper functions and prints assignment message"
 
@@ -56,13 +59,26 @@ def main():
         player_age = int(input("age?")) # player input
         age_check(player_age) # validates or rejects age
         chosen = True # breaks the loop if no error raised 
+        
+        ## SECURITY ISSUE #1: int(input("age?")) attempts to 
+        ## convert input without validating it first. Would
+        ## work better as a try/except block.
+
     game = True # flag for in game loop
     while game is True: # game loop
+
+        ## SECURITY ISSUE #3: no limit on attempts in while loops -
+        ## malicious user could enter invalid input repeatedly
+        ## and crash program.
 
         x_guess = int(input("What is your X coordinate guess?")) # gets user input for x-axis guess
         x_axis_check(x_guess) # calls on helper function and validates it or yields an error
         y_guess = str(input("What is your Y axis guess?")) # gets user input for y-axis guess
         y_axis_check(y_guess) # calls on helper function and validates it or yields an error
+        
+        ## SECURITY ISSUE #2: input of y_guess is not sanitized before
+        ## proceeding. Whitespace/unicode characters could bypass checks.
+
         proceed = str(input("want to continue?")) # provides option to break the game loop
         if proceed.lower() == "no": # if statement for breaking the loop
             game = False # breaks the loop
